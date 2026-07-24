@@ -33,7 +33,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         <section className="hidden border-r px-10 py-9 lg:flex lg:flex-col">
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-semibold text-muted-foreground">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
                 AF
               </div>
               <p className="text-lg font-semibold tracking-normal text-primary">

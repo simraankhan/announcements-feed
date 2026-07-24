@@ -1,10 +1,10 @@
 import Home from "@/components/Home";
-import { Spinner } from "@/components/ui/spinner";
+import Loading from "@/components/Loading";
 import { Suspense } from "react";
 
 const HomePage = () => {
   return (
-    <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<Loading className="h-screen! w-screen!" />}>
       <Home />
     </Suspense>
   );
