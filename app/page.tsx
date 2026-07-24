@@ -1,11 +1,13 @@
-import { clerkSignInUrl } from "@/lib/auth/clerk-routes";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import Home from "@/components/Home";
+import { Spinner } from "@/components/ui/spinner";
+import { Suspense } from "react";
 
-const Home = async () => {
-  const { isAuthenticated } = await auth();
-
-  redirect(isAuthenticated ? "/dashboard" : clerkSignInUrl);
+const HomePage = () => {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <Home />
+    </Suspense>
+  );
 };
 
-export default Home;
+export default HomePage;
