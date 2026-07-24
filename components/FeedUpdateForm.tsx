@@ -1,7 +1,7 @@
 "use client";
 
 import { Controller, useForm } from "react-hook-form";
-import FeedModel from "@/models/FeedModel";
+import FeedModel, { IFeed } from "@/models/FeedModel";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
@@ -15,17 +15,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Plus } from "lucide-react";
+import { Edit } from "lucide-react";
 import FileUpload from "./FileUpload";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Spinner } from "./ui/spinner";
 import { DialogRootActions } from "@base-ui/react";
-import { createAnnouncementAction } from "@/actions/announcement.action";
+import { updateAnnouncementAction } from "@/actions/announcement.action";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
+import { updateAnnouncement } from "@/services/announcement.service";
 
-const FeedForm = () => {
+interface Props {
+  feed: IFeed;
+}
+
+const FeedUpdateForm = ({ feed }: Props) => {
   // Hooks
   const form = useForm<z.infer<typeof FeedModel.feedFormSchema>>({
     resolver: zodResolver(FeedModel.feedFormSchema),
@@ -44,19 +49,27 @@ const FeedForm = () => {
   // States
   const [loading, setLoading] = useState(false);
 
+  // Effects
+  useEffect(() => {
+    if (!feed) return;
+
+    form.reset({
+      title: feed.title,
+      description: feed.description,
+      imageUrl: feed.imageUrl,
+    });
+  }, [feed]);
+
   // Functions
   const onSubmit = async (
     formValues: z.infer<typeof FeedModel.feedFormSchema>,
   ) => {
     setLoading(true);
     try {
-      const res = await createAnnouncementAction({
-        ...formValues,
-        createdUserId: user?.id,
-      });
+      const res = await updateAnnouncementAction(feed.id, formValues);
 
       if (res.success) {
-        toast.success("Announcement created successfully");
+        toast.success("Announcement updated successfully");
         form.reset();
         actionsRef.current?.close();
         actionsRef.current?.unmount();
@@ -69,20 +82,25 @@ const FeedForm = () => {
     setLoading(false);
   };
 
+  if (feed?.createdUserId !== user?.id) {
+    return null;
+  }
+
   return (
     <Dialog disablePointerDismissal actionsRef={actionsRef}>
       <DialogTrigger
         render={
-          <Button>
-            <Plus /> Post New Announcement
+          <Button variant={"link"} className={"no-underline!"}>
+            <Edit />
+            Update
           </Button>
         }
       />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Announcement Feedback</DialogTitle>
+          <DialogTitle>Update Announcement</DialogTitle>
           <DialogDescription>
-            Share your announcements with your team
+            Update {feed.title} announcement
           </DialogDescription>
         </DialogHeader>
         <form id="form-feedback" onSubmit={form.handleSubmit(onSubmit)}>
@@ -98,6 +116,7 @@ const FeedForm = () => {
                     hookForm={form}
                     id={field.name}
                     accept="image/*"
+                    image={feed.imageUrl}
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -129,4 +148,4 @@ const FeedForm = () => {
   );
 };
 
-export default FeedForm;
+export default FeedUpdateForm;

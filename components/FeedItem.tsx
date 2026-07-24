@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Clock } from "lucide-react";
+import FeedUpdateForm from "./FeedUpdateForm";
+import DeleteFeed from "./DeleteFeed";
 
 interface Props {
   feed: IFeed;
@@ -33,9 +35,17 @@ const FeedItem = ({ feed }: Props) => {
               Posted on {new Date(feed.createdAt).toDateString()}
             </span>
           </div>
-          <img src={feed.imageUrl} alt={feed.title} className="w-full" />
+          <img
+            src={feed.imageUrl}
+            alt={feed.title}
+            className="w-full h-75 object-cover"
+          />
         </div>
       </CardContent>
+      <CardFooter className="flex items-center justify-end">
+        <FeedUpdateForm feed={feed} />
+        <DeleteFeed feed={feed} />
+      </CardFooter>
     </Card>
   );
 };

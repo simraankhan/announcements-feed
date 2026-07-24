@@ -1,4 +1,4 @@
-import { ComponentProps, useRef, useState } from "react";
+import { ComponentProps, useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { FieldValues, useForm } from "react-hook-form";
@@ -15,20 +15,31 @@ interface FileUploadProps<
   T extends FieldValues,
 > extends ComponentProps<"input"> {
   hookForm: ReturnType<typeof useForm<T>>;
+  image?: string;
 }
 
 const FileUpload = <T extends FieldValues>({
   hookForm: form,
   id,
+  image,
   ...rest
 }: FileUploadProps<T>) => {
+  // Hooks
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [imageUrl, setImageUrl] = useState<string>();
+  // States
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+
+  // Effects
+  useEffect(() => {
+    if (!image) return;
+    setImageUrl(image);
+  }, [image]);
 
   const abortController = new AbortController();
 
+  // Functions
   const authenticator = async () => {
     try {
       const response = await fetch("/api/upload-auth");
@@ -154,10 +165,12 @@ const FileUpload = <T extends FieldValues>({
               variant={"link"}
               onClick={() => {
                 setImageUrl(undefined);
-                form.reset({
-                  ...form.getValues(),
-                  imageUrl: "",
-                });
+                if (id) {
+                  form.reset({
+                    ...form.getValues(),
+                    [id]: "",
+                  });
+                }
               }}
               disabled={loading}
             >

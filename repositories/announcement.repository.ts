@@ -22,4 +22,8 @@ export class AnnouncementRepository {
   ) {
     return await prisma.announcement.update({ where: { id }, data: payload });
   }
+
+  static async deleteAnnouncement(id: string) {
+    return await prisma.announcement.delete({ where: { id } });
+  }
 }

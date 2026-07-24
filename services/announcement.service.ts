@@ -33,3 +33,7 @@ export async function updateAnnouncement(
 ) {
   return AnnouncementRepository.updateAnnoncement(id, payload);
 }
+
+export async function deleteAnnouncement(id: string) {
+  return AnnouncementRepository.deleteAnnouncement(id);
+}

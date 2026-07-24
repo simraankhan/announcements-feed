@@ -12,4 +12,14 @@ export const createAnnouncementSchema = z.object({
   createdUserId: z.string().trim().min(1, "Created user is required"),
 });
 
+export const updateAnnouncementSchema = z.object({
+  title: z.string().trim().min(1, "Title is required"),
+  description: z
+    .string()
+    .trim()
+    .min(1, "Description is required")
+    .max(500, "Description cannot exceed 500 characters"),
+
+  imageUrl: z.string().trim().min(1, "Image is required"),
+});
 export type CreateAnnouncementDto = z.infer<typeof createAnnouncementSchema>;

@@ -3,7 +3,7 @@ import FeedItem from "./FeedItem";
 
 const Feeds = async () => {
   const feeds = await getAllAnnouncementsAction();
-  console.log(feeds);
+
   if (!feeds || feeds.length === 0) {
     return (
       <div className="flex items-center justify-center">
