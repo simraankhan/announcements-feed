@@ -12,7 +12,7 @@ import {
   createAnnouncementSchema,
   updateAnnouncementSchema,
 } from "@/validators/announcement";
-import { revalidateTag } from "next/cache";
+import { revalidateTag, updateTag } from "next/cache";
 import z from "zod";
 
 export async function createAnnouncementAction(body: unknown) {
@@ -27,7 +27,7 @@ export async function createAnnouncementAction(body: unknown) {
 
   const data = await createAnnouncement(validation.data);
 
-  revalidateTag(announcementAllCacheKey, "max");
+  updateTag(announcementAllCacheKey);
 
   return {
     success: true,
@@ -55,7 +55,7 @@ export async function updateAnnouncementAction(id: string, body: unknown) {
 
   const data = await updateAnnouncement(id, validation.data);
 
-  revalidateTag(announcementAllCacheKey, "max");
+  updateTag(announcementAllCacheKey);
 
   return {
     success: true,
@@ -65,5 +65,5 @@ export async function updateAnnouncementAction(id: string, body: unknown) {
 
 export async function deleteAnnouncementAction(id: string) {
   await deleteAnnouncement(id);
-  revalidateTag(announcementAllCacheKey, "max");
+  updateTag(announcementAllCacheKey);
 }
