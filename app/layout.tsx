@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import { clerkSignInUrl } from "@/lib/auth/clerk-routes";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <ClerkProvider>
+        <ClerkProvider afterSignOutUrl={clerkSignInUrl}>
           {children}
           <Toaster richColors position="top-right" />
         </ClerkProvider>

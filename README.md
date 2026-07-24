@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### 1. Project Overview
 
-## Getting Started
+## Project Name: Internal Team Portal
 
-First, run the development server:
+Purpose:
+A secure portal where authenticated employees can log in and access company announcements. Team members can create new announcements and view previously posted announcements.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Chosen Content Section: Announcements Feed
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Frontend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- TailwindCSS
+- ShadCN UI
+- React Hook Form
+- Zod
 
-## Learn More
+## Backend
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js Route Handlers
+- Prisma ORM
+- PostgreSQL
+- Clerk Auth
+- Image Kit
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Vercel
+- Prisma PostgreSQL
 
-## Deploy on Vercel
+### 3. Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Authentication
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Login
+- Email
+- Password
+- Secure session
+- Logout
+
+## Protected Portal
+
+Only authenticated users can access: `/dashboard`
+
+Unauthenticated users are redirected to: `/sign-in`
+
+## Announcements
+
+- Create
+  - Fields
+    - Title
+    - Description
+    - Image
+
+- Validation
+  - Required
+  - Max length
+
+- View
+
+- Display
+  - Latest first
+  - Created date
+  - Title
+  - Description
+  - Image
+
+- Update & Delete
+  - Only created user can update or delete the announcement
+
+### 4. How to run
+
+- Clone the repo
+- Create `.env` file
+- Set enviroment variables
+  - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+  - CLERK_SECRET_KEY=
+  - IMAGEKIT_PRIVATE_KEY =
+  - IMAGEKIT_PUBLIC_KEY =
+  - DATABASE_URL=
+- Install dependencies `npm install`
+- Generate prisma client `npx prisma generate`
+- Run the project `npm run dev`
