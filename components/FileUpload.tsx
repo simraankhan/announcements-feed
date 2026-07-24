@@ -147,7 +147,7 @@ const FileUpload = <T extends FieldValues>({
           }
         }}
       >
-        Select an image
+        Select a file
       </Button>
       {imageUrl && (
         <div className="flex flex-col items-center gap-2">
