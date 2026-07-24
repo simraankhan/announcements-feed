@@ -87,7 +87,7 @@
   --state-error: #ff4d4f;
   --state-success: #34d399;
   --state-warning: #fbbf24;
-
+  --radius: 0.625rem;
 }
 
 .light {
