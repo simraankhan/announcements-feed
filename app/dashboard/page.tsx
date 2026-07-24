@@ -1,8 +1,6 @@
 import FeedForm from "@/components/FeedForm";
 import Feeds from "@/components/Feeds";
 import Toolbar from "@/components/Toolbar";
-import { Spinner } from "@/components/ui/spinner";
-import { Suspense } from "react";
 
 const DashboardPage = () => {
   return (
@@ -17,15 +15,7 @@ const DashboardPage = () => {
           announcement posts with a title, description, and image, then displays
           those announcements in a dashboard feed.
         </h1>
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center p-5 w-full">
-              <Spinner />
-            </div>
-          }
-        >
-          <Feeds />
-        </Suspense>
+        <Feeds />
       </div>
     </>
   );

@@ -11,6 +11,7 @@ import {
 import { Clock } from "lucide-react";
 import FeedUpdateForm from "./FeedUpdateForm";
 import DeleteFeed from "./DeleteFeed";
+import Image from "next/image";
 
 interface Props {
   feed: IFeed;
@@ -35,10 +36,13 @@ const FeedItem = ({ feed }: Props) => {
               Posted on {new Date(feed.createdAt).toDateString()}
             </span>
           </div>
-          <img
+          <Image
             src={feed.imageUrl}
             alt={feed.title}
             className="w-full h-75 object-cover"
+            width={500}
+            height={500}
+            priority
           />
         </div>
       </CardContent>
