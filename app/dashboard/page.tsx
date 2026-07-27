@@ -7,7 +7,7 @@ const DashboardPage = () => {
     <>
       <Toolbar />
       <div className="container flex flex-col gap-10">
-        <div className="mt-10 flex justify-end">
+        <div className="mt-10 flex justify-start sm:justify-end">
           <FeedForm />
         </div>
         <h1 className="text-primary max-w-prose">

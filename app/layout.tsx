@@ -25,9 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+      <body>
         <ClerkProvider afterSignOutUrl={clerkSignInUrl}>
-          {children}
+          <main className="flex flex-col flex-1 min-h-dvh">{children}</main>
           <Toaster richColors position="top-right" />
         </ClerkProvider>
       </body>

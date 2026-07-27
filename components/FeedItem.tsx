@@ -1,7 +1,6 @@
 import { IFeed } from "@/models/FeedModel";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -39,7 +38,7 @@ const FeedItem = ({ feed }: Props) => {
           <Image
             src={feed.imageUrl}
             alt={feed.title}
-            className="w-full h-75 object-cover"
+            className="w-full h-50 object-cover rounded-md"
             width={500}
             height={500}
             priority

@@ -13,7 +13,7 @@ const Feeds = async () => {
   }
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-8 pb-20">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 pb-20">
       {feeds.map((feed) => (
         <FeedItem key={feed.id} feed={feed} />
       ))}

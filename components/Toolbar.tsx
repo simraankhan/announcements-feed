@@ -5,9 +5,9 @@ const Toolbar = () => {
   return (
     <div className="w-full bg-secondary px-4 py-2 flex items-center">
       <div className="flex-1">
-        <h1 className="text-2xl font-semibold text-muted-foreground">
-          Announcements
-        </h1>
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+          AF
+        </div>
       </div>
       <UserButton
         appearance={clerkAppearance}
